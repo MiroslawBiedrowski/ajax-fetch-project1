@@ -1,6 +1,10 @@
 const getUsers = (e) => {
     e.preventDefault();
-    const url = 'https://randomuser.me/api/?results=10';
+
+    const usersNumber = document.querySelector('[name = "users-number"]').value;
+    const usersGender = document.querySelector('[name = "gender"]').value;
+    const url = `https://randomuser.me/api/?results=${usersNumber}&gender=${usersGender === "both" ? "male,female" : usersGender}`;
+    console.log(url);
 
     fetch(url) //obietnica - pending
 
