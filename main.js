@@ -21,15 +21,16 @@ const getUsers = (e) => {
 
 const showUsers = (users) => {
     const resuleArea = document.querySelector('.user-list');
-    users.forEach(user => {
-        // console.log(user);
-        const item = document.createElement('div');
-        item.className = 'user';
-        item.innerHTML = `
-        <div class="user__name">${user.name.title.toUpperCase()} ${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}}</div>
+    resuleArea.textContent = "",
+        users.forEach(user => {
+            // console.log(user);
+            const item = document.createElement('div');
+            item.className = 'user';
+            item.innerHTML = `
+        <div class="user__name">${user.name.title.toUpperCase()} ${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}</div>
         <img class="user__image" src=${user.picture.medium}>
         `
-        resuleArea.appendChild(item);
-    })
+            resuleArea.appendChild(item);
+        })
 }
 document.querySelector('.generator').addEventListener('submit', getUsers)
