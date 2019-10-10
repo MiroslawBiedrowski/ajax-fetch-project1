@@ -4,7 +4,6 @@ const getUsers = (e) => {
     const usersNumber = document.querySelector('[name = "users-number"]').value;
     const usersGender = document.querySelector('[name = "gender"]').value;
     const url = `https://randomuser.me/api/?results=${usersNumber}&gender=${usersGender === "both" ? "male,female" : usersGender}`;
-    console.log(url);
 
     fetch(url) //obietnica - pending
 
@@ -16,8 +15,21 @@ const getUsers = (e) => {
                 return response.json()
             }
         })
-        .then(json => console.log(json))
+        .then(json => showUsers(json.results))
         .catch(err => console.log(err))
 }
 
+const showUsers = (users) => {
+    const resuleArea = document.querySelector('.user-list');
+    users.forEach(user => {
+        // console.log(user);
+        const item = document.createElement('div');
+        item.className = 'user';
+        item.innerHTML = `
+        <div class="user__name">${user.name.title.toUpperCase()} ${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}}</div>
+        <img class="user__image" src=${user.picture.medium}>
+        `
+        resuleArea.appendChild(item);
+    })
+}
 document.querySelector('.generator').addEventListener('submit', getUsers)
